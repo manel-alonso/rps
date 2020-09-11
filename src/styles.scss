@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+// We'll add a global "board game" look to the website
+@font-face {
+    font-family: "Sketch 3D";
+    src: url("assets/sketch.otf");
+}
+
+body {
+    background: url("assets/bg.png");
+}
+
+h1 {
+    font-family: "Sketch 3D";
+    text-align: center;
+    font-size: 5vw;
+}

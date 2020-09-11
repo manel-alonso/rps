@@ -1,0 +1,24 @@
+<!-- If there's no game in progress we let the user decide which game to play -->
+<div class="selectable-buttons" *ngIf="!gameManagerService.IsGameStarted()">
+    <button (click)="StartHumanGame()">Me vs TheComputer</button>
+    <button (click)="StartComputerGame()">TheComputer vs TheComputer</button>
+</div>
+
+<!-- If the game has ended and the human was playing we show the result -->
+<div class="game-result" *ngIf="!gameManagerService.IsGameStarted() && gameManagerService.IsHumanPlaying()">
+    <p *ngIf="gameResult">It's a ¡{{GameResultText()}}!</p>
+    <p *ngIf="gameManagerService.PlayerAction(1)">The computer picked {{ComputerActionText(1)}}</p>
+</div>
+
+<!-- If the game has ended and it was the computers playing we show the result -->
+<div class="game-result" *ngIf="!gameManagerService.IsGameStarted() && !gameManagerService.IsHumanPlaying()">
+    <p *ngIf="gameResult">It's a ¡{{GameResultText()}}!</p>
+    <p *ngIf="gameManagerService.PlayerAction(0)">The first computer picked {{ComputerActionText(0)}}</p>
+    <p *ngIf="gameManagerService.PlayerAction(1)">The second computer picked {{ComputerActionText(1)}}</p>
+</div>
+
+<!-- If the is in progress and the human was playing we let him pick his action -->
+<div class="selectable-buttons" *ngIf="gameManagerService.IsGameStarted() && gameManagerService.IsHumanPlaying()">
+    <!-- We iterate over the playable actions so it is expandable easily -->
+    <button (click)="PlayAction(action.type)" *ngFor="let action of actionResultService.actions">{{action.name}}</button>
+</div>
